@@ -8,7 +8,8 @@ from sklearn.dummy import DummyClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score
 from sklearn.utils.multiclass import unique_labels
 
-import src.data.dataset_utils as utils 
+import src.data.dataset_utils as utils
+import src.data.processed_data as process
 
 def create_predictions_dataset(test_df, model, X_test):
     predictions = model.predict(X_test)
@@ -41,8 +42,8 @@ def get_model_metrics(model, y_test, X_test, model_name='Unknown model'):
 
     
 def create_train_matrix(file, data_type='processed', predicted_variable='Label'):
-    dataset = utils.load_dataset(file, data_type)
-    train_df, result_train_df = utils.generate_train_dataset_lowerbound(dataset)
+    dataset = utils.load_dataset('',file, data_type)
+    train_df, result_train_df = process.generate_train_dataset_lowerbound(dataset)
     X_train = train_df.values.astype('float')
     y_train = result_train_df[predicted_variable].ravel()
     print (y_train.shape)
@@ -52,8 +53,8 @@ def create_train_matrix(file, data_type='processed', predicted_variable='Label')
 
 
 def create_test_matrix(file, data_type='processed', predicted_variable='Label'):
-    dataset = utils.load_dataset(file='dataset_feature_vector.csv', data_type='processed')
-    test_df, result_test_df = utils.generate_test_dataset(dataset)
+    dataset = utils.load_dataset('',file, data_type)
+    test_df, result_test_df = process.generate_test_dataset(dataset)
     X_test = test_df.values.astype('float')
     y_test = result_test_df['Label'].ravel()
     print (y_test.shape)
