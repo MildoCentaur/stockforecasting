@@ -19,12 +19,14 @@ def prepare_feture_vector(df):
             .assign(Label=lambda x: np.where(((x.Tomorrow_Open - x.Open) > 0), 1, 0))
             .assign(Diff_Today_Open=lambda x: (x.Open - x.Yesterday_Open) / x.Yesterday_Open)
             .assign(Diff_Today_Close=lambda x: (x.Close - x.Yesterday_Close) / x.Yesterday_Close)
-            .assign(Diff_Today_Volume=lambda x: (x.Volume - x.Yesterday_Volume) / x.Yesterday_Volume)
             .assign(Diff_Today_High=lambda x: (x.High - x.Yesterday_High) / x.Yesterday_High)
             .assign(Diff_Today_Low=lambda x: (x.Low - x.Yesterday_Low) / x.Yesterday_Low)
             .assign(Month = lambda x: x.Date.dt.month)
             .assign(Year = lambda x: x.Date.dt.year)
             .assign(Day = lambda x: x.Date.dt.day)
+            .assign(Yesterday_Month = lambda x: x.Yesterday_Date.dt.month)
+            .assign(Yesterday_Year = lambda x: x.Yesterday_Date.dt.year)
+            .assign(Yesterday_Day = lambda x: x.Yesterday_Date.dt.day)
             )
 
 

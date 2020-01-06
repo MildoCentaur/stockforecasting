@@ -11,11 +11,30 @@ def process_dataset(product='Stocks', underlyer='aapl.us.txt'):
     
     
 def generate_train_dataset(dataset, split_date='2016-01-01'):
-    return dataset[(dataset.Date < split_date) & (dataset.Date > pd.to_datetime('2013-01-01'))]
+    dataset_aux = dataset[dataset.Date < split_date]
+    result_df = pd.DataFrame()
+    result_df['Label'] = dataset_aux.Label
+    result_df['Index'] = dataset_aux.index
+    dataset_aux = dataset_aux.drop(columns=['Tomorrow_Date', 'Tomorrow_Open','Label','Diff_Tomorrow_Open','Date','Yesterday_Date']) 
+    return dataset_aux, result_df
+
+
+def generate_train_dataset_lowerbound(dataset, split_date='2016-01-01', lower_bound = '2000-01-01'):
+    dataset_aux = dataset[(dataset.Date < split_date) & (dataset.Date > lower_bound)]
+    result_df = pd.DataFrame()
+    result_df['Label'] = dataset_aux.Label
+    result_df['Index'] = dataset_aux.index
+    dataset_aux = dataset_aux.drop(columns=['Tomorrow_Date', 'Tomorrow_Open','Label','Diff_Tomorrow_Open','Date','Yesterday_Date']) 
+    return dataset_aux, result_df
 
 
 def generate_test_dataset(dataset, split_date='2016-01-01'):
-    return dataset[dataset.Date > split_date]
+    dataset_aux = dataset[dataset.Date > split_date]
+    result_df = pd.DataFrame()
+    result_df['Label'] = dataset_aux.Label
+    result_df['Index'] = dataset_aux.index
+    dataset_aux = dataset_aux.drop(columns=['Tomorrow_Date', 'Tomorrow_Open','Label','Diff_Tomorrow_Open','Date','Yesterday_Date']) 
+    return dataset_aux, result_df
 
 if __name__ == '__main__':
     dataset = process_dataset('Stocks', 'aapl.us.txt')
