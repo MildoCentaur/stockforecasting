@@ -1,9 +1,7 @@
-import pandas as pd
-import sklearn
+from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.utils.testing import ignore_warnings
-from sklearn.exceptions import ConvergenceWarning
 
 import src.models.prediction_utils as utils
 
@@ -21,7 +19,7 @@ with ignore_warnings(category=ConvergenceWarning):
     logistic_model_grid.fit(X_train, y_train)
 
 #Get the best    
-print ('Best parameters for logistic model grid'.logistic_model_grid.best_params_)
+print('Best parameters for logistic model grid {}'.format(logistic_model_grid.best_params_))
 print ('Best score : {0:.2f}'.format(logistic_model_grid.best_score_))
 print ('Score for logistic regression - version 2 : {0:.2f}'.format(logistic_model_grid.score(X_test, y_test)))
 
