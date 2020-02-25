@@ -20,8 +20,8 @@ with ignore_warnings(category=ConvergenceWarning):
 
 #Get the best    
 print('Best parameters for logistic model grid {}'.format(logistic_model_grid.best_params_))
-print ('Best score : {0:.2f}'.format(logistic_model_grid.best_score_))
-print ('Score for logistic regression - version 2 : {0:.2f}'.format(logistic_model_grid.score(X_test, y_test)))
+print('Best score : {0:.2f}'.format(logistic_model_grid.best_score_))
+print('Score for logistic regression - version 2 : {0:.2f}'.format(logistic_model_grid.score(X_test, y_test)))
 
 utils.get_model_metrics(logistic_model_grid, y_test, X_test, 'Logistic model grid')
 utils.compare_prediction_visual(utils.create_predictions_dataset(result_test_df, logistic_model_grid, X_test), result_test_df, 'Logistic Grid')
