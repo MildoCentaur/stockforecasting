@@ -1,7 +1,6 @@
 import os
 
 import pandas as pd
-from matplotlib.ticker import FormatStrFormatter, StrMethodFormatter, PercentFormatter
 
 
 def load_dataset(subfolder='', file='aapl.us.txt', data_type='raw', index_column=0):
@@ -38,10 +37,3 @@ logger.info("Just an information")
 logger.warning("Its a Warning")
 logger.error("Did you try to divide by zero")
 logger.critical("Internet is down")
-
-import matplotlib.dates as mdates
-
-mdates
-FormatStrFormatter
-StrMethodFormatter
-PercentFormatter
